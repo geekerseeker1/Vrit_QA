@@ -1,1 +1,17 @@
 
+# Signup Automation Task
+
+## Overview
+This project automates the signup process for the site:  
+[https://authorized-partner.netlify.app/login](https://authorized-partner.netlify.app/login)
+
+## Requirements
+- Python 3.8+
+- Google Chrome Browser
+- ChromeDriver (matching your Chrome version)
+
+## Setup & Run
+1. Clone this repo:
+   ```bash
+   git clone <repo_link>
+   cd signup_automation_task
