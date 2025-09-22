@@ -1,0 +1,6 @@
+signup_automation_task/
+│── signup_automation_script.py
+│── README.md
+│── requirements.txt
+│── test_report.pdf
+│── demo_video.mp4
