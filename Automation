@@ -1,0 +1,48 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+
+# Setup Chrome WebDriver
+service = Service("chromedriver")  # Ensure chromedriver is installed and in PATH
+driver = webdriver.Chrome(service=service)
+
+try:
+    # Open the signup page
+    driver.get("https://authorized-partner.netlify.app/login")
+    driver.maximize_window()
+
+    # Click on signup link
+    signup_link = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.LINK_TEXT, "Sign Up"))
+    )
+    signup_link.click()
+
+    # Fill signup form
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.NAME, "name"))
+    )
+
+    driver.find_element(By.NAME, "name").send_keys("Test User")
+    driver.find_element(By.NAME, "email").send_keys("testuser@example.com")
+    driver.find_element(By.NAME, "password").send_keys("Test@1234")
+    driver.find_element(By.NAME, "confirmPassword").send_keys("Test@1234")
+
+    # Submit the form
+    driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+
+    # Wait for confirmation (adjust as per site behavior)
+    success_msg = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//h2[contains(text(),'Welcome')]"))
+    )
+    print("Signup Successful:", success_msg.text)
+
+except Exception as e:
+    print("Test Failed:", e)
+
+finally:
+    time.sleep(5)
+    driver.quit()
